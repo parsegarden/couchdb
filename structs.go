@@ -131,6 +131,13 @@ type QueryParameters struct {
 	UpdateSeq       bool   `url:"update_seq,omitempty"`
 }
 
+type SearchParameters struct {
+  Query           string `url:"q,omitempty"`
+	Limit           int    `url:"limit,omitempty"`
+	IncludeDocs     bool   `url:"include_docs,omitempty"`
+	Sort            string `url:"sort,omitempty"`
+}
+
 type ViewResponse struct {
 	Offset    int   `json:"offset,omitempty"`
 	Rows      []Row `json:"rows,omitempty"`

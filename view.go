@@ -52,6 +52,23 @@ func (v *View) Post(name string, keys []string, params QueryParameters) (*ViewRe
 	return newViewResponse(body)
 }
 
+// Execute specified view function from specified design document.
+func (v *View) Search(name string, params SearchParameters) (*ViewResponse, error) {
+	q, err := query.Values(params)
+	if err != nil {
+		return nil, err
+	}
+	uri := fmt.Sprintf("%s_search/%s?%s", v.Url, name, q.Encode())
+	body, err := v.Database.Client.request("GET", uri, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	defer body.Close()
+	return newViewResponse(body)
+}
+
+
+
 func newViewResponse(body io.ReadCloser) (*ViewResponse, error) {
 	response := &ViewResponse{}
 	return response, json.NewDecoder(body).Decode(&response)
