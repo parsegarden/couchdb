@@ -53,8 +53,14 @@ func (v *View) Post(name string, keys []string, params QueryParameters) (*ViewRe
 }
 
 func (v *View) AllDocsPost(keys []string) (*ViewResponse, error) {
+  type Keys struct {
+    Keys []string `json:"keys"`
+  }
+  keysJson := Keys{
+    Keys:keys,
+  }
 	// create POST body
-	res, err := json.Marshal(keys)
+	res, err := json.Marshal(keysJson)
 	if err != nil {
 		return nil, err
 	}
