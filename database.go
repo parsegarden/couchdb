@@ -160,3 +160,10 @@ func (db *Database) View(name string) View {
 		Database: db,
 	}
 }
+func (db *Database) AllDocsView() View {
+	url := fmt.Sprintf("%s_all_docs", db.Url)
+	return View{
+		Url:      url,
+		Database: db,
+	}
+}

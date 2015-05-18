@@ -52,6 +52,21 @@ func (v *View) Post(name string, keys []string, params QueryParameters) (*ViewRe
 	return newViewResponse(body)
 }
 
+func (v *View) AllDocsPost(keys []string) (*ViewResponse, error) {
+	// create POST body
+	res, err := json.Marshal(keys)
+	if err != nil {
+		return nil, err
+	}
+	data := bytes.NewReader(res)
+	body, err := v.Database.Client.request("POST", v.Url, data, "application/json")
+	if err != nil {
+		return nil, err
+	}
+	defer body.Close()
+	return newViewResponse(body)
+}
+
 // Execute specified view function from specified design document.
 func (v *View) Search(name string, params SearchParameters) (*ViewResponse, error) {
 	q, err := query.Values(params)
