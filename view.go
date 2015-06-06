@@ -20,6 +20,10 @@ func (v *View) Get(name string, params QueryParameters) (*ViewResponse, error) {
 		return nil, err
 	}
 	uri := fmt.Sprintf("%s_view/%s?%s", v.Url, name, q.Encode())
+
+  // parsegarden
+  stdOut(uri)
+
 	body, err := v.Database.Client.request("GET", uri, nil, "")
 	if err != nil {
 		return nil, err
@@ -44,6 +48,10 @@ func (v *View) Post(name string, keys []string, params QueryParameters) (*ViewRe
 	}
 	url := fmt.Sprintf("%s_view/%s?%s", v.Url, name, q.Encode())
 	data := bytes.NewReader(res)
+
+  // parsegarden
+  stdOut(url)
+
 	body, err := v.Database.Client.request("GET", url, data, "application/json")
 	if err != nil {
 		return nil, err
@@ -88,9 +96,11 @@ func (v *View) Search(name string, params SearchParameters) (*ViewResponse, erro
 	return newViewResponse(body)
 }
 
-
-
 func newViewResponse(body io.ReadCloser) (*ViewResponse, error) {
 	response := &ViewResponse{}
 	return response, json.NewDecoder(body).Decode(&response)
+}
+
+func stdOut(str string) {
+  fmt.Println("{\"debug\":\""+str+"\"}")
 }
