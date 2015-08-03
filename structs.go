@@ -141,7 +141,7 @@ type SearchParameters struct {
 type ViewResponse struct {
 	Offset    int   `json:"offset,omitempty"`
 	Rows      []Row `json:"rows,omitempty"`
-	TotalRows int   `json:"total_rows,omitempty"`
+	//TotalRows int   `json:"total_rows,omitempty"`
 	UpdateSeq int   `json:"update_seq,omitempty"`
 }
 
