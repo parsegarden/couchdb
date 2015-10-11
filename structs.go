@@ -132,17 +132,17 @@ type QueryParameters struct {
 }
 
 type SearchParameters struct {
-  Query           string `url:"q,omitempty"`
-	Limit           int    `url:"limit,omitempty"`
-	IncludeDocs     bool   `url:"include_docs,omitempty"`
-	Sort            string `url:"sort,omitempty"`
+	Query       string `url:"q,omitempty"`
+	Limit       int    `url:"limit,omitempty"`
+	IncludeDocs bool   `url:"include_docs,omitempty"`
+	Sort        string `url:"sort,omitempty"`
 }
 
 type ViewResponse struct {
-	Offset    int   `json:"offset,omitempty"`
-	Rows      []Row `json:"rows,omitempty"`
+	Offset int   `json:"offset,omitempty"`
+	Rows   []Row `json:"rows,omitempty"`
 	//TotalRows int   `json:"total_rows,omitempty"`
-	UpdateSeq int   `json:"update_seq,omitempty"`
+	UpdateSeq int `json:"update_seq,omitempty"`
 }
 
 type Row struct {

@@ -21,8 +21,8 @@ func (v *View) Get(name string, params QueryParameters) (*ViewResponse, error) {
 	}
 	uri := fmt.Sprintf("%s_view/%s?%s", v.Url, name, q.Encode())
 
-  // parsegarden
-  stdOut(uri)
+	// parsegarden
+	stdOut(uri)
 
 	body, err := v.Database.Client.request("GET", uri, nil, "")
 	if err != nil {
@@ -49,8 +49,8 @@ func (v *View) Post(name string, keys []string, params QueryParameters) (*ViewRe
 	url := fmt.Sprintf("%s_view/%s?%s", v.Url, name, q.Encode())
 	data := bytes.NewReader(res)
 
-  // parsegarden
-  stdOut(url)
+	// parsegarden
+	stdOut(url)
 
 	body, err := v.Database.Client.request("GET", url, data, "application/json")
 	if err != nil {
@@ -61,12 +61,12 @@ func (v *View) Post(name string, keys []string, params QueryParameters) (*ViewRe
 }
 
 func (v *View) AllDocsPost(keys []string) (*ViewResponse, error) {
-  type Keys struct {
-    Keys []string `json:"keys"`
-  }
-  keysJson := Keys{
-    Keys:keys,
-  }
+	type Keys struct {
+		Keys []string `json:"keys"`
+	}
+	keysJson := Keys{
+		Keys: keys,
+	}
 	// create POST body
 	res, err := json.Marshal(keysJson)
 	if err != nil {
@@ -102,5 +102,5 @@ func newViewResponse(body io.ReadCloser) (*ViewResponse, error) {
 }
 
 func stdOut(str string) {
-  fmt.Println("{\"debug\":\""+str+"\"}")
+	fmt.Println("{\"debug\":\"" + str + "\"}")
 }

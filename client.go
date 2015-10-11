@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
+	"time"
 )
 
 // Create a new client.
@@ -215,7 +216,7 @@ func (c *Client) request(method, url string, data io.Reader, contentType string)
 		req.SetBasicAuth(c.Username, c.Password)
 	}
 	// add cookies
-	client := &http.Client{Jar: c.CookieJar}
+	client := &http.Client{Jar: c.CookieJar, Timeout: time.Second * 30}
 	res, err := client.Do(req)
 	if err != nil {
 		return nil, err
